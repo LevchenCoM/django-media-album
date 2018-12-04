@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Welcome to your Album!</h1>
+          {% if not request.user.is_authenticated %}
+          <p class="lead text-muted">Register or login and let's edit the album!</p>
+          <p>
+            <a href="/login/" class="btn btn-primary my-2">Login</a>
+            <a href="/register/" class="btn btn-secondary my-2">Register</a>
+          </p>
+          <p class="text-muted"> </p>
+          {% endif %}
+        </div>
+      </section>
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row">
+            {% for media in objects %}
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <!-- <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap"> -->
+                <img class="card-img-top" src="{{media.file.url}}" alt="Card image cap">
+                <div class="card-body">
+                  <h3>{{media.title}}</h3>
+                  <p class="card-text">{{media.description}}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      {% if media.author.username == request.user.username %}
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      {% endif %}
+                    </div>
+                    <small class="text-muted">{{media.created}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+    </main>
+{% endblock %}

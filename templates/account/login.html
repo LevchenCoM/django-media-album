@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block main_css%}
+<link rel="stylesheet" type="text/css" href="{% static 'css/main_styles.css' %}">
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<body class="text-center">
+    <form class="form-signin" method="post">
+      {% csrf_token %}
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <label for="inputEmail" class="sr-only">Username</label>
+      {% render_field form.username type="text" class="form-control" placeholder="Username" required="true" %}
+      {% if form.username.errors %}
+        {% for error in form.username.errors %}
+        <div class="alert alert-warning">
+          {{ error }}
+        </div>
+        {% endfor %}
+      {% endif %}
+      <label for="inputPassword" class="sr-only">Password</label>
+      {% render_field form.password type="password" class="form-control" placeholder="Password" required="true" %}
+      {% if form.password.errors %}
+        {% for error in form.password.errors %}
+        <div class="alert alert-warning">
+          {{ error.text }}
+        </div>
+        {% endfor %}
+      {% endif %}
+
+      {% if form.non_field_errors %}
+      <div class="alert alert-warning">
+        {{ form.non_field_errors }}
+      </div>
+      {% endif %}
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    </form>
+  </body>
+{% endblock %}
