@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main role="main">
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-md-8">
+          {% if media.file_type == "0"%}
+          <center><img class="img-fluid" src="{{media.file.url}}" alt="Image cap"></center>
+          {% else %}
+          <center><video src="{{media.file.url}}" style="max-width: 100%; max-height: 100%;" controls></video></center>
+          {% endif %}
+          <p></p>
+          <form class="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 font-weight-normal">Edit media</h1>
+            {{form.as_p}}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Change</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+{% endblock %}

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'widget_tweaks',
     'django.contrib.staticfiles',
+    'core.apps.CoreConfig',
     'album.apps.AlbumConfig',
 ]
 

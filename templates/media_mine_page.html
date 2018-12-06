@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">{{request.user}}'s medias!</h1>
+          {% if not request.user.is_authenticated %}
+          <p class="lead text-muted">Register or login and let's edit the album!</p>
+          <p>
+            <a href="/login/" class="btn btn-primary my-2">Login</a>
+            <a href="/register/" class="btn btn-secondary my-2">Register</a>
+          </p>
+          <p class="text-muted"> </p>
+          {% endif %}
+        </div>
+      </section>
+
+      {% include 'media_list.html' %}
+
+    </main>
+{% endblock %}
